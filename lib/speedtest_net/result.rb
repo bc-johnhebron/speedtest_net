@@ -46,5 +46,29 @@ module SpeedtestNet
     def pretty_distance
       Formatter::Distance.call(distance)
     end
+
+    def keys
+      keys_from_hash = []
+      to_hash.map do |k, _v|
+        keys_from_hash << k
+      end
+      keys_from_hash
+    end
+
+    def to_hash
+      hash = {}
+      hash.merge!(@client.to_hash)
+      hash.merge!(@server.to_hash)
+      hash.merge!(@download.to_hash)
+      hash.merge!(@upload.to_hash)
+    end
+
+    def to_array
+      array = []
+      array.concat(@client.to_array)
+      array.concat(@server.to_array)
+      array.concat(@download.to_array)
+      array.concat(@upload.to_array)
+    end
   end
 end

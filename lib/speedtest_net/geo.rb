@@ -10,6 +10,17 @@ module SpeedtestNet
       @long = long
     end
 
+    def to_hash
+      {
+        lat: @lat,
+        long: @long
+      }
+    end
+
+    def to_array
+      [@lat, @long]
+    end
+
     def distance(other) # rubocop:disable Metrics/AbcSize
       a = (Math.sin(radian_lat) * Math.sin(other.radian_lat)) +
           (Math.cos(radian_lat) * Math.cos(other.radian_lat) * Math.cos(radian_long - other.radian_long))

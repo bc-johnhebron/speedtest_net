@@ -29,6 +29,33 @@ module SpeedtestNet
       @latency = Latency.measure(self)
     end
 
+    def to_hash # rubocop:disable Metrics/MethodLength
+      {
+        id: @id,
+        url: @url,
+        distance: @distance,
+        name: @name,
+        country: @country,
+        cc: @cc,
+        sponsor: @sponsor,
+        host: @host,
+        server_lat: @geo.to_hash[:lat],
+        server_long: @geo.to_hash[:long]
+      }
+    end
+
+    def to_array
+      array = [@id, @url, @distance, @name, @country, @cc, @sponsor, @host]
+      array.map! do |element|
+        if element.is_a?(String)
+          "\"#{element}\""
+        else
+          element
+        end
+      end
+      array.concat(@geo.to_array)
+    end
+
     class << self
       def list
         xml_servers = fetch_servers

@@ -19,6 +19,22 @@ module SpeedtestNet
       CalculateSpeed.call(@results)
     end
 
+    def to_hash
+      hash = {}
+      @results.each_with_index do |v, i|
+        hash["Upload #{i}"] = v
+      end
+      hash
+    end
+
+    def to_array
+      array = []
+      @results.map do |v|
+        array << v
+      end
+      array
+    end
+
     class << self
       def measure(server, timeout: HTTP_TIMEOUT) # rubocop:disable Metrics/MethodLength
         config = Config.fetch

@@ -21,6 +21,24 @@ module SpeedtestNet
       CalculateSpeed.call(@results)
     end
 
+    # Returns a hash with all download speed results
+    def to_hash
+      hash = {}
+      @results.each_with_index do |v, i|
+        hash["Download #{i}"] = v
+      end
+      hash
+    end
+
+    # Returns an array with all download speed results
+    def to_array
+      array = []
+      @results.map do |v|
+        array << v
+      end
+      array
+    end
+
     class << self
       def measure(server, timeout: HTTP_TIMEOUT) # rubocop:disable Metrics/MethodLength
         config = Config.fetch
