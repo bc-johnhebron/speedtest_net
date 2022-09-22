@@ -8,8 +8,7 @@ require 'speedtest_net/http_timeout'
 
 module SpeedtestNet
   class Upload
-    SIZE = [250_000, 500_000, 1_000_000, 2_000_000, 4_000_000, 8_000_000,
-            12_000_000].freeze
+    SIZE = [25_000, 50_000, 100_000, 200_000, 400_000].freeze
 
     def initialize(results)
       @results = results
